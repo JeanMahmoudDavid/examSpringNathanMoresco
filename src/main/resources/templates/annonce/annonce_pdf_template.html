@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></link>
+		<title>Liste Annonces</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+	</head>
+	<body>
+	
+		<h1>Liste des Annonces</h1>
+		
+		<table>
+		    <tr>
+		        <th>Titre</th>
+		        <th>Contenu</th>
+		        <th>URL Image</th>
+		        <th>Date Creation</th>
+		    </tr>
+		
+		    <!--/*@thymesVar id="annonces" type="java.util.List"*/-->
+		
+		    <tr th:each="annonce : ${annonces}">
+		        <!--/*@thymesVar id="annonce" type="com.nm.exam.model.Annonce"*/-->
+		        <td th:utext="${annonce.titre}">..</td>
+		        <td th:utext="${annonce.contenu}">..</td>
+		        <td th:utext="${annonce.image}" class="truncate" style="width:100px;">..</td>
+		        <td th:utext="${#dates.day(annonce.datePublication)}+'/'+${#dates.month(annonce.datePublication)}+'/'+${#dates.year(annonce.datePublication)}"></td>
+		
+		    </tr>
+
+		</table>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	</body>
+</html>

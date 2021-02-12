@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	 <head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<title>Ajouter/Modifier Annonce</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div class="row">
+			<div class="col s10 offset-s1 center">
+				<h4>Formulaire Ajout/Modification Annonce</h4>
+			</div>
+		</div>
+		<!--/*@thymesVar id="annonce" type="com.nm.exam.model.annonce"*/-->
+		<form action="#" th:object="${annonce}" method="post">
+			
+			<div class="row">
+				<div class="input-field col s5 offset-s1">
+		          	<input placeholder="Titre" id="titre" type="text" th:field="*{titre}" class="validate">
+		          	<label for="titre" th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">Titre</label>
+		        </div>
+		        <div class="input-field col s5">
+		          	<input placeholder="Contenu de l'Annonce" id="contenu" type="text" th:field="*{contenu}" class="validate" minlength="20">
+		          	<label for="contenu" th:if="${#fields.hasErrors('contenu')}" th:errors="*{contenu}">Contenu</label>
+		        </div>
+		        <div class="input-field col s10 offset-s1">
+		          	<input placeholder="Url Image" id="image" type="text" th:field="*{image}" class="truncate validate">
+		          	<label for="image" th:if="${#fields.hasErrors('image')}" th:errors="*{titre}">Image</label>
+		        </div>
+		        <div class="col s6 offset-s1">
+		        	<button class="btn btn-flat green darken-2 white-text" type="submit"><i class="material-icons white-text left">check</i>Valider</button>
+		        </div>
+			</div>
+		</form>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	</body>
+</html>

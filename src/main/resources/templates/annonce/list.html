@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<title>Liste Annonces</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+	</head>
+	
+	<body>
+		<h1>Liste des Annonces</h1>
+		
+		<a th:href="@{/add}" class="waves-effect waves-light btn blue darken-2 white-text"><i class="material-icons white-text left">add</i>Ajouter Annonce</a>
+		
+		<a th:href="@{/export/pdf}" class="waves-effect waves-light btn green darken-2 white-text"><i class="material-icons white-text left">archive</i>Exporter PDF</a>
+        
+        <div class="row"><div class="col s12"></div></div>
+        
+		<table class="responsive-table centered highlight striped">
+		    <tr>
+		        <th>Titre</th>
+		        <th>Contenu</th>
+		        <th style="width:100px;" class="truncate">URL Image</th>
+		        <th>Date Creation</th>
+		        <th>Actions</th>
+		    </tr>
+		
+		    <!--/*@thymesVar id="annonces" type="java.util.List"*/-->
+		
+		    <tr th:each="annonce : ${annonces}">
+		        <!--/*@thymesVar id="annonce" type="com.nm.exam.model.Annonce"*/-->
+		        <td th:utext="${annonce.titre}">..</td>
+		        <td th:utext="${annonce.contenu}">..</td>
+		        <td th:utext="${annonce.image}" style="width:100px;" class="truncate">..</td>
+		        <td th:utext="${#dates.day(annonce.datePublication)}+'/'+${#dates.month(annonce.datePublication)}+'/'+${#dates.year(annonce.datePublication)}"></td>
+				<td>
+					<a th:href="@{/{id}(id=${annonce.id})}" class="waves-effect waves-light btn green darken-2 white-text"><i class="material-icons white-text left">assignment</i>Detail</a>
+					<a th:href="@{/edit/{id}(id=${annonce.id})}" class="waves-effect waves-light btn amber darken-2 white-text"><i class="material-icons white-text left">create</i>Editer</a>
+					<!-- <a th:href="@{/delete{id}(id=${annonce.id})}" class="waves-effect waves-light btn red darken-2 black-text"><i class="material-icons black-text left">delete_forever</i>Supprimer</a>  -->
+
+  					<!-- Modal Delete -->
+  					<a th:href="@{#modal{id}(id=${annonce.id})}" class="waves-effect waves-light btn red darken-2 black-text modal-trigger"><i class="material-icons black-text left">delete_forever</i>Supprimer</a>
+  					
+				  	<div th:id="'modal' + ${annonce.id}" class="modal tiny black">
+					    <div class="modal-content black">
+					      	<h4 class="red-text text-darken-2 truncate"th:utext="'Supprimer Annonce : ' + ${annonce.titre} + ' ?!'"></h4>
+					      	<p class="red-text text-darken-2 " th:utext="'Etes-vous certain de vouloir supprimer cette Annonce ?'"></p>
+					    </div>
+					    <div class="modal-footer black">
+					      	<a th:href="@{/delete/{id}(id=${annonce.id})}" class="modal-close waves-effect waves-red btn-flat red-text text-darken-2 "><i class="material-icons red-text text-darken-2 left">close</i>Supprimer</a>
+					    </div>
+				  	</div>
+				  	
+		        </td>
+		    </tr>
+
+		</table>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script>
+			$(document).ready(function(){
+			    $('.modal').modal();
+			  });
+		</script>
+	</body>
+</body>
+</html>
